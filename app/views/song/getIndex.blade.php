@@ -59,7 +59,7 @@
 	</div>
 
 	<div class="col-xs-3">
-		<a href="#" class="btn btn-block btn-info">import new songs</a>
+		<a href="{{URL::to('song/preimport')}}" class="btn btn-block btn-info">import new songs</a>
 	</div>
 </div>
 

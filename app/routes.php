@@ -18,4 +18,5 @@ Route::get('/', function() {
 Route::controller('artist','ArtistController');
 Route::controller('song','SongController');
 Route::controller('genre','GenreController');
+Route::resource('banner','BannerResource');
 //API
