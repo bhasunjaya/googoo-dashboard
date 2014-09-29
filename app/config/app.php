@@ -106,13 +106,8 @@ return array(
         'Illuminate\Validation\ValidationServiceProvider',
         'Illuminate\View\ViewServiceProvider',
         'Illuminate\Workbench\WorkbenchServiceProvider',
-        'Intervention\Image\ImageServiceProvider',
         'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
         'Way\Generators\GeneratorsServiceProvider',
-        'Cviebrock\EloquentSluggable\SluggableServiceProvider',
-        'Zizaco\Confide\ServiceProvider',
-        'Zizaco\Entrust\EntrustServiceProvider',
-        'Barryvdh\Debugbar\ServiceProvider',
         'Clockwork\Support\Laravel\ClockworkServiceProvider'
     ),
     /*
@@ -174,10 +169,6 @@ return array(
         'Str' => 'Illuminate\Support\Str',
         'URL' => 'Illuminate\Support\Facades\URL',
         'Validator' => 'Illuminate\Support\Facades\Validator',
-        'View' => 'Illuminate\Support\Facades\View',
-        'Image' => 'Intervention\Image\Facades\Image',
-        'Confide' => 'Zizaco\Confide\Facade',
-        'Entrust' => 'Zizaco\Entrust\EntrustFacade',
-        'Debugbar' => 'Barryvdh\Debugbar\Facade'
+        'View' => 'Illuminate\Support\Facades\View'
     ),
 );

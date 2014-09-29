@@ -8,15 +8,8 @@
         "way/generators": "2.*",
         "raveren/kint": "v0.9",
         "barryvdh/laravel-ide-helper": "1.*",
-        "anahkiasen/underscore-php": "dev-master",
-        "intervention/image": "2.*",
-        "intervention/imagecache": "dev-master",
         "fzaninotto/faker": "v1.3.0",
-        "cviebrock/eloquent-sluggable": "2.*",
         "laravelbook/ardent": "2.*",
-        "zizaco/confide": "~4.0@dev",
-        "zizaco/entrust": "1.2.*@dev",
-        "barryvdh/laravel-debugbar": "1.6.*@dev",
         "itsgoingd/clockwork": "1.*"
     },
     "autoload": {
