@@ -1,0 +1,29 @@
+body {
+    padding-top: 70px;
+}
+.page-header {
+    padding-bottom: 9px;
+    margin: 10px;
+    border-bottom: 1px solid #eee;
+}
+h1{
+    font-size: 18px;
+}
+
+.data-list .panel-footer{
+    padding: 0px 4px;
+}
+.data-list .panel-footer .pagination{
+    margin: 4px 0;
+}
+
+#item-detail h1{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0;
+}
+
+#item-detail p.category{color:#ccc}
+#item-detail #btn-item-top {border-bottom: solid 1px #3db5d8;}
+#item-detail #btn-item-top .btn{padding:4px 10px;margin:4px 0;}
+#item-detail .description{padding-top: 20px;}

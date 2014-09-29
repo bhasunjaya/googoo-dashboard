@@ -1,0 +1,5 @@
+$(function() {
+    $('.colorbox').colorbox();
+
+
+});
