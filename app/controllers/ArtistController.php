@@ -1,39 +1,46 @@
 <?php
 
-class ArtistController extends BaseController {
-	
-	public function getIndex()
-	{
-		$artists = Artist::getArtists(10);
-		// return Response::json($artists);
-		return View::make('artist.getIndex')
-		->with('artists',$artists);
-	}
+class ArtistController extends BaseController
+{
 
-	public function getShow($id){
-		$artist = Artist::with('songs','genres','fbartist')->findOrFail($id);
-		return View::make('artist.getShow')
-		->with('artist',$artist);
-	}
+    public function getIndex()
+    {
+        $artists = Artist::getArtists(10);
+        // return Response::json($artists);
+        return View::make('artist.getIndex')
+                ->with('artists', $artists);
+    }
 
-	public function getEdit($id){
-		$artist = Artist::findOrFail($id);
-		return View::make('artist.getEdit')->withArtist($artist);
-	}
+    public function getShow($id)
+    {
+        $artist = Artist::with('songs', 'genres', 'fbartist')->findOrFail($id);
+        return View::make('artist.getShow')
+                ->with('artist', $artist);
+    }
 
-	public function postEdit($id){
-		$artist = Artist::findOrFail($id);
-		$artist->name = Input::get('name');
-		if ($artist->save()) {
-			return Redirect::to('/artist/show/'.$id)->with('message', 'data has been updated');
-		} else {
-			return Redirect::to('/artist/edit/'.$id)->withErrors($artist->errors());
-		}
-	}
+    public function getEdit($id)
+    {
+        $artist = Artist::findOrFail($id);
+        return View::make('artist.getEdit')->withArtist($artist);
+    }
 
+    public function postEdit($id)
+    {
+        $artist = Artist::findOrFail($id);
+        $artist->name = Input::get('name');
+        if ($artist->save())
+        {
+            return Redirect::to('/artist/show/' . $id)->with('message', 'data has been updated');
+        }
+        else
+        {
+            return Redirect::to('/artist/edit/' . $id)->withErrors($artist->errors());
+        }
+    }
 
-	function getInterest(){
-		$sql = '
+    function getInterest()
+    {
+        $sql = '
 		SELECT 
 		mi.artist_id,
 		count(*) as interest_count,
@@ -45,12 +52,8 @@ class ArtistController extends BaseController {
 		ORDER BY interest_count DESC
 		LIMIT 0,30
 		';
-		$res =  DB::select($sql);
-		return Response::json($res);
-	}
-
-	
-
-
+        $res = DB::select($sql);
+        return Response::json($res);
+    }
 
 }

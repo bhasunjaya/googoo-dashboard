@@ -38,10 +38,11 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="{{URL::to('/artist')}}">Artis</a></li>
-                        <li><a href="{{URL::to('/banner')}}">Banner</a></li>
                         <li><a href="{{URL::to('/song')}}">Song</a></li>
+                        <li><a href="{{URL::to('/genre')}}">Genre</a></li>
+                        <li><a href="{{URL::to('/banner')}}">Banner</a></li>
                         <li><a href="{{URL::to('/program')}}">Program</a></li>
-                        
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class=""><a href="#">Logout</a></li>

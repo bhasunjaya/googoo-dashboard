@@ -1,12 +1,39 @@
 <?php
 
-class Genre extends \Eloquent {
-	protected $fillable = [];
+class Genre extends \LaravelBook\Ardent\Ardent
+{
+
+    protected $fillable = [];
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'modified_at';
 
-	
-	function scopeOfSlug($query,$slug){
-		return $query->where('slug', '=', trim($slug));
-	} 
+    protected $guarded = ['id'];
+    public static $rules = array(
+        'name' => 'required'
+    );
+
+    function artists()
+    {
+        return $this->belongsToMany('Artist', 'artist_has_genres')->orderBy('name');
+    }
+
+    static function getGenres($limit = 10)
+    {
+
+        $genres = self::with('artists')->orderBy('name');
+        if (Input::get('q'))
+        {
+            $q = '%' . Input::get('q') . '%';
+            $genres->where('name', 'like', $q);
+        }
+        $results = $genres->paginate($limit);
+        return $results;
+    }
+
+    function scopeOfSlug($query, $slug)
+    {
+        return $query->where('slug', '=', trim($slug));
+    }
+
 }
