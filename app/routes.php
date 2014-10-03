@@ -18,12 +18,9 @@ Route::get('/', function() {
 Route::controller('artist', 'ArtistController');
 Route::controller('song', 'SongController');
 Route::controller('genre', 'GenreController');
+Route::controller('ruangsiar', 'RuangsiarController');
 Route::resource('banner', 'BannerResource');
 Route::resource('program', 'ProgramResource');
 
-Route::get('ruangsiar', function() {
-    return View::make('ruangsiar');
-});
-
 //API
-Route::get('api/playlist','ApiController@playlist');
+Route::get('api/playlist', 'ApiController@playlist');
