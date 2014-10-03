@@ -47,7 +47,6 @@
 						<td><small class="text-muted">{{substr($artist->modified_at,0,16)}}</small></td>
 						<td>
 							<a href="{{URL::to('artist/edit/'.$artist->id)}}" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
-							<a href="#" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
 						</td>
 					</tr>
 					@endforeach
@@ -60,8 +59,6 @@
 
 
 	<div class="col-xs-3">
-		<a href="{{URL::to('artist/edit/'.$artist->id)}}" class="btn btn-block btn-info">Artist By User</a>
-		<a href="{{URL::to('artist/edit/'.$artist->id)}}" class="btn btn-block btn-info">No Song Artist</a>
 	</div>
 </div>
 
