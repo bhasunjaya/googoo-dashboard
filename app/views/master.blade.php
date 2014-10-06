@@ -45,7 +45,7 @@
 
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li class=""><a href="#">Logout</a></li>
+                        <li class=""><a href="/ruangsiar">Ruang Siar</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>

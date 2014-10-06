@@ -15,9 +15,12 @@ Route::get('/', function() {
     return View::make('master');
 });
 
-Route::controller('artist','ArtistController');
-Route::controller('song','SongController');
-Route::controller('genre','GenreController');
-Route::resource('banner','BannerResource');
-Route::resource('program','ProgramResource');
+Route::controller('artist', 'ArtistController');
+Route::controller('song', 'SongController');
+Route::controller('genre', 'GenreController');
+Route::controller('ruangsiar', 'RuangsiarController');
+Route::resource('banner', 'BannerResource');
+Route::resource('program', 'ProgramResource');
+
 //API
+Route::get('api/playlist', 'ApiController@playlist');
