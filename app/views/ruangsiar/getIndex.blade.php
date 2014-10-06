@@ -4,6 +4,9 @@
 @stop
 
 @section('javascripts')
+<script type="text/javascript" src="{{asset('js/handlebars.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/jquery.timeago.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/ruangsiar.js')}}"></script>
 @stop
 
 @section('content')
@@ -25,210 +28,16 @@
                         <th class="col-xs-4">Artist</th>
                         <th class="col-xs-1">BPM</th>
                         <th>Songs</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
-                <tbody id="playlist">
-                    <tr>
-                        <td>
-                            <a href="#"><span class="label label-default">2</span></a>
-                            &nbsp;&nbsp;&nbsp;&nbsp;Naif
-                        </td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">106</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">Selalu</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="label label-default">1</span>&nbsp;&nbsp;&nbsp;&nbsp;David Gilmour</td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">92</li>
-                                <li class="">83</li>
-                                <li class="">76</li>
-                                <li class="">79</li>
-                                <li class="">84</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">Out Of The Blue</li>
-                                <li class="">Take A Breath</li>
-                                <li class="">No Way</li>
-                                <li class="">This Heaven</li>
-                                <li class="">Cruise</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="label label-default">1</span>&nbsp;&nbsp;&nbsp;&nbsp;Lady Gaga</td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">79</li>
-                                <li class="">99</li>
-                                <li class="">94</li>
-                                <li class="">107</li>
-                                <li class="">85</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">Bad Kids</li>
-                                <li class="">Paper Gangsta</li>
-                                <li class="">Eh, Eh (Nothing Else I Can Say)</li>
-                                <li class="">Retro, Dance, Freak</li>
-                                <li class="">Americano</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="label label-default">1</span>&nbsp;&nbsp;&nbsp;&nbsp;Boyce Avenue</td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">93</li>
-                                <li class="">91</li>
-                                <li class="">87</li>
-                                <li class="">86</li>
-                                <li class="">108</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">Hate That I Love You (Rihanna Cover)</li>
-                                <li class="">Sweetest Girl (Dollar Bill) (Wyclef Jean Cover)</li>
-                                <li class="">With You (Chris Brown Cover)</li>
-                                <li class="">Before It's Too Late (Goo Goo Dolls Cover)</li>
-                                <li class="">Keep Holding On (Avril Lavigne Cover)</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="label label-default">1</span>&nbsp;&nbsp;&nbsp;&nbsp;Janis Joplin</td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">110</li>
-                                <li class="">109</li>
-                                <li class="">80</li>
-                                <li class="">82</li>
-                                <li class="">109</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">Try (Just A Little Bit Harder)</li>
-                                <li class="">Ball And Chain</li>
-                                <li class="">Piece Of My Heart</li>
-                                <li class="">Bye, Bye Baby</li>
-                                <li class="">Maybe</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="label label-default">1</span>&nbsp;&nbsp;&nbsp;&nbsp;thedyingsirens</td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">80</li>
-                                <li class="">99</li>
-                                <li class="">107</li>
-                                <li class="">87</li>
-                                <li class="">83</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">Thedyingsirens</li>
-                                <li class="">Byebye</li>
-                                <li class="">Happiness Is A Hoax</li>
-                                <li class="">#99</li>
-                                <li class="">Be With You (Re-Recorded Version)</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="label label-default">1</span>&nbsp;&nbsp;&nbsp;&nbsp;Sigur Rós</td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">85</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">Svo Hlj￳tt</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="label label-default">1</span>&nbsp;&nbsp;&nbsp;&nbsp;Pearl Jam</td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">101</li>
-                                <li class="">102</li>
-                                <li class="">101</li>
-                                <li class="">95</li>
-                                <li class="">84</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">Alive (Original)</li>
-                                <li class="">Light Years</li>
-                                <li class="">The Fixer</li>
-                                <li class="">Nothing As It Seems</li>
-                                <li class="">Better Man</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="label label-default">1</span>&nbsp;&nbsp;&nbsp;&nbsp;Coldplay</td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">108</li>
-                                <li class="">108</li>
-                                <li class="">99</li>
-                                <li class="">93</li>
-                                <li class="">76</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">Us Against The World</li>
-                                <li class="">Parachutes</li>
-                                <li class="">For You</li>
-                                <li class="">Major Minus</li>
-                                <li class="">U.F.O.</li>
-                            </ul>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><span class="label label-default">1</span>&nbsp;&nbsp;&nbsp;&nbsp;Bjork</td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">96</li>
-                                <li class="">79</li>
-                                <li class="">78</li>
-                                <li class="">109</li>
-                                <li class="">110</li>
-                            </ul>
-                        </td>
-                        <td>
-                            <ul class="list-unstyled">
-                                <li class="">Sun In My Mouth</li>
-                                <li class="">It's Not Up To You</li>
-                                <li class="">Virus</li>
-                                <li class="">Dark Matter</li>
-                                <li class="">Thunderbolt</li>
-                            </ul>
-                        </td>
-                    </tr>
-                </tbody>
+                <tbody id="playlist"></tbody>
             </table>
         </div>
     </div>
+
+
+
     <div class="col-xs-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -240,7 +49,7 @@
                         </button>
                         <ul class="dropdown-menu slidedown">
                             @foreach($programs as $p)
-                            <li><a href="#">{{$p->name}}</a></li>
+                            <li><a href="{{URL::to('/api/program/change/'.$p->id)}}" class="program-change">{{$p->name}}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -248,23 +57,96 @@
             </div>
             <div class="panel-body">
                 <div id="program-current">
-                    <h4>Selamat Datang 10-12</h4>
-                    <p>BPM 100-120</p>
+                    <h4 id="current-program-name" data-id="{{$currentProgram->id}}">{{$currentProgram->name}}</h4>
+                    <p>
+                        BPM 
+                        <span  id="current-program-minbpm">{{$currentProgram->min_bpm}}</span> - 
+                        <span  id="current-program-maxbpm">{{$currentProgram->max_bpm}}</span>
+                    </p>
+                    <p>
+                    </p>
+                </div>
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            Ignore List
+                        </th>
+                        <th>
+                            <a href="{{URL::to('/api/ignore/list')}}" class="btn btn-primary btn-xs pull-right" id="btn-reload-ignore">
+                                <i class="glyphicon glyphicon-refresh"></i> 
+                                <span id="text-reload-ignore"></span>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody  id="ignore-list">
+
+                </tbody>
+            </table>
+            <hr/>
+            <table class="table table-hover table-bordered" >
+                <thead>
+                    <tr>
+                        <th>
+                            <a href="{{URL::to('/api/listeners/'.$currentProgram->id)}}" class="btn btn-primary btn-xs pull-right" id="btn-reload-connected-user">
+                                <i class="glyphicon glyphicon-refresh"></i> 
+                                <span id="text-reload-connected-user"></span>
+                            </a>
+                            Listeners</th>
+                    </tr>
+                </thead>
+                <tbody  id="listeners-list">
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+        <div class="panel panel-default">
+            <div class="panel-heading"><strong>Fave Artist But No Song</strong></div>
+            <div id="nosong-list" style="height:200px;overflow: auto;">
+                <div class="list-group" style="display: block;">
+                    @foreach($nosongs as $s)
+                    <a href="{{URL::to('artist/show/'.$s->id)}}" class="list-group-item">{{$s->name}} <span class="badge pull-right">{{$s->total}} </span></a>
+                    @endforeach
                 </div>
             </div>
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">connected users</div>
-        </div>
-
-
-        <div class="panel panel-default">
-            <div class="panel-heading">All Music Interest</div>
+            <a class="twitter-timeline" href="https://twitter.com/search?q=%40googooradio" data-widget-id="519074417914040320">Tweets about "@googooradio"</a>
+            <script>!function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+    if (!d.getElementById(id)) {
+        js = d.createElement(s);
+        js.id = id;
+        js.src = p + "://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }
+}(document, "script", "twitter-wjs");</script>
         </div>
 
 
     </div>
 </div>
+
+
+
+<script id="hb-listeners" type="text/x-handlebars-template">
+    @include('ruangsiar._listeners')
+</script>
+
+<script id="hb-playlist" type="text/x-handlebars-template">
+    @{{#each data}}
+    @include('ruangsiar._playlist');
+    @{{/each}}
+</script>
+
+<script id="hb-ignore" type="text/x-handlebars-template">
+    @include('ruangsiar._ignore')
+</script>
 
 @stop
