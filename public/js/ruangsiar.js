@@ -1,5 +1,7 @@
 $(function () {
 
+    connectedUser();
+    ignoreList();
     setTimeout(function () {
         connectedUser();
         ignoreList();
