@@ -82,19 +82,13 @@ class ApiController extends BaseController
 
     public function listeners($id)
     {
-        $sql = "
-        SELECT * FROM `listeners` 
-        WHERE 
-            `program_id` = '2' 
-            and DATE(created_at) = '2014-09-25' 
-            ORDER BY `created_at` DESC           
-        ";
-        $date = '2014-09-25';
+        $date = App::environment() == 'local' ? '2014-09-25' : date('Y-m-d');
         $listeners = Listener::where('program_id', $id)
             ->whereRaw('DATE(created_at) = ?', array($date))
             ->orderBy('created_at', 'DESC')
             ->get();
-        return Response::json(array('data' => $listeners));
+        return Response::json(array
+                ('data' => $listeners));
     }
 
     public function nosong($programID)
@@ -117,6 +111,7 @@ class ApiController extends BaseController
             LIMIT 10
         ";
         $results = DB::select($sql, array($programID, $date));
+
         return Response::json($results);
     }
 
@@ -125,7 +120,8 @@ class ApiController extends BaseController
         $ignore = Ignore::with('artist')
             ->orderBy('created_at')
             ->get();
-        return Response::json(array('data' => $ignore->toArray()));
+        return Response::json(array
+                ('data' => $ignore->toArray()));
     }
 
     function ignore($id)
@@ -146,6 +142,7 @@ class ApiController extends BaseController
         {
             $ignore->delete();
         }
+
         return Response::json($ignore);
     }
 
