@@ -9,12 +9,10 @@ class RuangsiarController extends BaseController
 
         $programs = Program::all();
         $currentProgram = Program::where('is_active', 'true')->first();
-        $listeners = Listener::currentListener($currentProgram->id, $date);
         $nosongs = $this->nosong($currentProgram->id, $date);
 
         return View::make('ruangsiar.getIndex')
                 ->with('currentProgram', $currentProgram)
-                ->withListeners($listeners)
                 ->withNosongs($nosongs)
                 ->withPrograms($programs);
     }
