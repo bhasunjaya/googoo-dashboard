@@ -4,6 +4,7 @@
 @stop
 
 @section('javascripts')
+<script type="text/javascript" src="{{asset('js/ruangsiar.js')}}"></script>
 @stop
 
 @section('content')
@@ -229,6 +230,9 @@
             </table>
         </div>
     </div>
+
+
+
     <div class="col-xs-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -240,7 +244,7 @@
                         </button>
                         <ul class="dropdown-menu slidedown">
                             @foreach($programs as $p)
-                            <li><a href="#">{{$p->name}}</a></li>
+                            <li><a href="{{URL::to('/api/program/change/'.$p->id)}}" class="program-change">{{$p->name}}</a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -248,19 +252,37 @@
             </div>
             <div class="panel-body">
                 <div id="program-current">
-                    <h4>Selamat Datang 10-12</h4>
-                    <p>BPM 100-120</p>
+                    <h4 id="current-program-name">{{$currentProgram->name}}</h4>
+                    <p>
+                        BPM 
+                        <span  id="current-program-minbpm">{{$currentProgram->min_bpm}}</span> - 
+                        <span  id="current-program-maxbpm">{{$currentProgram->max_bpm}}</span>
+                    </p>
                 </div>
             </div>
         </div>
 
         <div class="panel panel-default">
-            <div class="panel-heading">connected users</div>
+            <div class="panel-heading"><strong>Last connected users</strong></div>
+            <div id="listeners-list" style="height:200px;overflow: auto;">
+                <ul class="list-group" style="display: block;">
+                    @foreach($listeners as $r)
+                    <li class="list-group-item">{{$r->name}} <small class="text-muted">{{$r->created_at->diffForHumans()}}</small></li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
 
 
         <div class="panel panel-default">
-            <div class="panel-heading">All Music Interest</div>
+            <div class="panel-heading"><strong>Fave Artist But No Song</strong></div>
+            <div id="nosong-list" style="height:200px;overflow: auto;">
+                <div class="list-group" style="display: block;">
+                    @foreach($nosongs as $s)
+                    <a href="{{URL::to('artist/show/'.$s->id)}}" class="list-group-item">{{$s->name}} <span class="badge pull-right">{{$s->total}} </span></a>
+                    @endforeach
+                </div>
+            </div>
         </div>
 
 

@@ -12,6 +12,7 @@
  */
 
 Route::get('/', function() {
+    $environment = App::environment();
     return View::make('master');
 });
 
@@ -24,3 +25,6 @@ Route::resource('program', 'ProgramResource');
 
 //API
 Route::get('api/playlist', 'ApiController@playlist');
+Route::get('api/program/change/{id}', 'ApiController@programChange');
+Route::get('api/listeners/{id}', 'ApiController@listeners');
+Route::get('api/nosong/{id}', 'ApiController@nosong');
