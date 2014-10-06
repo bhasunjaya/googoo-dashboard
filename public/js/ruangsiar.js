@@ -1,6 +1,9 @@
 $(function () {
-    connectedUser();
-    ignoreList();
+
+    setTimeout(function () {
+        connectedUser();
+        ignoreList();
+    }, 3000 * 2 * 10);
 
     function ignoreList() {
         $.get('/api/ignore/list', function (r) {
