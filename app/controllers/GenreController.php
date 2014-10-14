@@ -15,6 +15,13 @@ class GenreController extends BaseController
         $genre = Genre::findOrFail($id);
         return View::make('genre.getEdit')->withGenre($genre);
     }
+    
+    function getDelete($id)
+    {
+        $genre = Genre::findOrFail($id);
+        $genre->delete();
+        return Redirect::to('/genre');
+    }
 
     function postEdit($id)
     {

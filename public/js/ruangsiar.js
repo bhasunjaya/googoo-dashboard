@@ -84,4 +84,14 @@ $(function () {
 
         return false;
     });
+    
+    // removeall ignore action
+    $("#btn-delete-ignore").on('click', function () {
+        $.get('/api/ignore/removeall', function (r) {
+            playlist();
+            ignoreList();
+        });
+
+        return false;
+    });
 });

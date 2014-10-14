@@ -23,6 +23,13 @@ class ArtistController extends BaseController
         $artist = Artist::findOrFail($id);
         return View::make('artist.getEdit')->withArtist($artist);
     }
+    
+    public function getDelete($id)
+    {
+        $artist = Artist::findOrFail($id);
+        $artist->delete();
+        return Redirect::to('/artist');
+    }
 
     public function postEdit($id)
     {
