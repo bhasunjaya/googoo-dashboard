@@ -148,5 +148,11 @@ class ApiController extends BaseController
         }
         return Response::json($ignore);
     }
+    
+    function ignoreRemoveAll()
+    {
+        $ignore = Ignore::truncate();
+        return Response::json($ignore);
+    }
 
 }
