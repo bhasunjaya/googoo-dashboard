@@ -20,7 +20,7 @@ class ArtistController extends BaseController
 
     public function getEdit($id)
     {
-        $artist = Artist::findOrFail($id);
+        $artist = Artist::with('genres')->findOrFail($id);
         return View::make('artist.getEdit')->withArtist($artist);
     }
     
@@ -35,14 +35,22 @@ class ArtistController extends BaseController
     {
         $artist = Artist::findOrFail($id);
         $artist->name = Input::get('name');
-        if ($artist->save())
-        {
-            return Redirect::to('/artist/show/' . $id)->with('message', 'data has been updated');
+        
+        $genre_list = Input::get('genre');
+        $argenre = explode(",", $genre_list);
+        foreach ($argenre as $genre) {
+            $genre_slug = Str::slug(strtolower($genre));
+            echo $genre_slug;
         }
-        else
-        {
-            return Redirect::to('/artist/edit/' . $id)->withErrors($artist->errors());
-        }
+        
+//        if ($artist->save())
+//        {
+//            return Redirect::to('/artist/show/' . $id)->with('message', 'data has been updated');
+//        }
+//        else
+//        {
+//            return Redirect::to('/artist/edit/' . $id)->withErrors($artist->errors());
+//        }
     }
 
     function getInterest()

@@ -65,6 +65,19 @@ $(function () {
 
         return false;
     });
+    
+    //likedmember 
+    $("#playlist").on('click', '.btn-liked-member', function () {
+        var id = $(this).attr('data-id');
+        $.get('/api/likedmember/' + id, function (r) {
+            var source = $("#hb-likedmember").html();
+            var template = Handlebars.compile(source);
+            $("#likedMemberModal").html(template(r)).slideDown('slow');
+            $('#likedMemberModal').modal('show');
+        });
+
+        return false;
+    });
 
 
     //reload the ignore 
