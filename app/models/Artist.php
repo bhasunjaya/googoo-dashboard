@@ -37,10 +37,10 @@ class Artist extends \LaravelBook\Ardent\Ardent
         }
         return $artists->paginate($limit);
     }
-
+    
     function scopeOfSlug($query, $slug)
     {
         return $query->where('slug', '=', trim($slug));
     }
-
+    
 }

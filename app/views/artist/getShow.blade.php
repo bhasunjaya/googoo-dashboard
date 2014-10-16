@@ -27,7 +27,7 @@
                         <td>Genre</td>
                         <td>
                             @foreach($artist->genres as $genre)
-                            {{$genre->name}}
+                            {{$genre->name}},
                             @endforeach
                         </td>
                     </tr>
