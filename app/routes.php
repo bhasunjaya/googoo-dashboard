@@ -25,9 +25,11 @@ Route::resource('program', 'ProgramResource');
 
 //API
 Route::get('api/playlist', 'ApiController@playlist');
+Route::get('api/likedmember/{id}', 'ApiController@likedmember');
 Route::get('api/program/change/{id}', 'ApiController@programChange');
 Route::get('api/listeners/{id}', 'ApiController@listeners');
 Route::get('api/nosong/{id}', 'ApiController@nosong');
 Route::get('api/ignore/list', 'ApiController@ignoreList');
 Route::get('api/ignore/{id}/remove', 'ApiController@ignoreRemove');
+Route::get('api/ignore/removeall', 'ApiController@ignoreRemoveAll');
 Route::get('api/ignore/{id}', 'ApiController@ignore');

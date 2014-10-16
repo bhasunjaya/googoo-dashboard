@@ -31,6 +31,7 @@
                         <th>Genre</th>
                         <th>Jumlah Artis</th>
                         <th>&nbsp;</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +43,9 @@
                         <td>{{$genre->artists->count()}}</td>
                         <td>
                             <a href="{{URL::to('genre/edit/'.$genre->id)}}" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </td>
+                        <td>
+                            <a href="{{URL::to('genre/delete/'.$genre->id)}}" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span></a>
                         </td>
                     </tr>
                     @endforeach

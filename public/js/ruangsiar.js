@@ -70,6 +70,19 @@ $(function () {
 
         return false;
     });
+    
+    //likedmember 
+    $("#playlist").on('click', '.btn-liked-member', function () {
+        var id = $(this).attr('data-id');
+        $.get('/api/likedmember/' + id, function (r) {
+            var source = $("#hb-likedmember").html();
+            var template = Handlebars.compile(source);
+            $("#likedMemberModal").html(template(r)).slideDown('slow');
+            $('#likedMemberModal').modal('show');
+        });
+
+        return false;
+    });
 
 
     //reload the ignore 
@@ -83,6 +96,16 @@ $(function () {
     $("#ignore-list").on('click', '.btn-remove-ignore', function () {
         var id = $(this).attr('data-id');
         $.get('/api/ignore/' + id + '/remove', function (r) {
+            playlist();
+            ignoreList();
+        });
+
+        return false;
+    });
+    
+    // removeall ignore action
+    $("#btn-delete-ignore").on('click', function () {
+        $.get('/api/ignore/removeall', function (r) {
             playlist();
             ignoreList();
         });

@@ -36,6 +36,13 @@ class SongController extends BaseController
             return Redirect::to('/song/edit/' . $id)->withErrors($song->errors());
         }
     }
+    
+    public function getDelete($id)
+    {
+        $song = Song::findOrFail($id);
+        $song->delete();
+        Response::json($song);
+    }
 
     public function getPreimport()
     {

@@ -77,6 +77,9 @@
                             <a href="{{URL::to('/api/ignore/list')}}" class="btn btn-primary btn-xs pull-right" id="btn-reload-ignore">
                                 <i class="glyphicon glyphicon-refresh"></i> 
                                 <span id="text-reload-ignore"></span>
+                            </a>&nbsp;
+                            <a href="{{URL::to('/api/ignore/removeall')}}" class="btn btn-danger btn-xs pull-right" id="btn-delete-ignore">
+                                delete all
                             </a>
                         </th>
                     </tr>
@@ -118,7 +121,7 @@
 
         <div class="panel panel-default">
             <a class="twitter-timeline" href="https://twitter.com/search?q=%40googooradio" data-widget-id="519074417914040320">Tweets about "@googooradio"</a>
-            <script>!function (d, s, id) {
+            <script>!function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
     if (!d.getElementById(id)) {
         js = d.createElement(s);
@@ -132,7 +135,10 @@
 
     </div>
 </div>
-
+<!-- Modal -->
+<div class="modal fade" id="likedMemberModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    
+</div>
 
 
 <script id="hb-listeners" type="text/x-handlebars-template">
@@ -143,6 +149,10 @@
     @{{#each data}}
     @include('ruangsiar._playlist');
     @{{/each}}
+</script>
+
+<script id="hb-likedmember" type="text/x-handlebars-template">
+    @include('ruangsiar._likedmember');
 </script>
 
 <script id="hb-ignore" type="text/x-handlebars-template">

@@ -36,13 +36,20 @@ class ApiController extends BaseController
                 ->whereRaw('bpm BETWEEN ' . $program->min_bpm . ' AND ' . $program->max_bpm, array())
                 ->limit(5)
                 ->get();
-
+            
+            $sql = "SELECT m.id, m.fullname "
+                . "FROM members m INNER JOIN music_interests mi "
+                . "ON mi.`fb_user_id` = m.`facebook_id` "
+                . "WHERE mi.`artist_id` = ?";
+            $likedmember = DB::select($sql, array($i->artist_id));
+            
             if ($allsongs->toArray())
             {
                 $song['id'] = $i->artist_id;
                 $song['artist'] = $i->name;
                 $song['total'] = $i->total;
                 $song['total_song'] = count($allsongs);
+                $song['liked_member'] = count($likedmember);
                 $song['last'] = $i->last;
                 $song['songs'] = $allsongs->toArray();
                 $songs[] = $song;
@@ -55,6 +62,21 @@ class ApiController extends BaseController
         }
         $json['success'] = true;
         $json['data'] = $songs;
+        return Response::json($json);
+    }
+    
+    function likedmember($id){
+        $sql = "SELECT m.id, m.fullname "
+                . "FROM members m INNER JOIN music_interests mi "
+                . "ON mi.`fb_user_id` = m.`facebook_id` "
+                . "WHERE mi.`artist_id` = ?";
+        $results = DB::select($sql, array($id));
+        $result = "";
+        foreach ($results as $key => $value) {
+            $result .= $value->fullname.", ";
+        }
+        $json['success'] = true;
+        $json['data'] = $result;
         return Response::json($json);
     }
 
@@ -143,6 +165,12 @@ class ApiController extends BaseController
             $ignore->delete();
         }
 
+        return Response::json($ignore);
+    }
+    
+    function ignoreRemoveAll()
+    {
+        $ignore = Ignore::truncate();
         return Response::json($ignore);
     }
 
