@@ -46,6 +46,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class=""><a href="/ruangsiar">Ruang Siar</a></li>
+                        <li class=""><a href="{{ URL::to('logout') }}">Logout</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
