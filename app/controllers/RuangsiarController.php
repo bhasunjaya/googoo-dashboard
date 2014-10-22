@@ -30,7 +30,7 @@ class RuangsiarController extends BaseController
                 l.program_id = ?
                 AND DATE(l.created_at) = ? 
                 AND a.name IS NOT  NULL
-                AND s.title IS NULL
+                AND s.id IS NULL
             GROUP BY a.id
             ORDER BY total DESC  
             LIMIT 10
