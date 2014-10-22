@@ -35,6 +35,7 @@ class RuangsiarController extends BaseController
             ORDER BY total DESC  
             LIMIT 10
         ";
+        
         $results = DB::select($sql, array($programID, $date));
         return $results;
     }
