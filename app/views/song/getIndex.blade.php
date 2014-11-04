@@ -37,7 +37,7 @@
                 <tbody>
                     @foreach($songs as $song)
                     <?php 
-                        print_r($song->dbartist->toArray());
+                        print_r($song->dbartist);
                     ?>
                     <tr>
                         <td>
