@@ -35,9 +35,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    sd($songs);
-                    ?>
+                    @foreach($songs as $song)
+                        {{$song->title}}
+                    @endforeach
                 </tbody>
             </table>
         </div>
