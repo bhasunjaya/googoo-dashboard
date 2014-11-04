@@ -35,7 +35,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    <?php print_r($songs)?>
                 </tbody>
             </table>
         </div>
