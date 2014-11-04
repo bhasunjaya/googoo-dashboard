@@ -35,9 +35,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($Songs as $song)
-                    <?php print_r($song) ?>
-<!--                    <tr>
+                    @foreach($songs as $song)
+                        <!--                    <tr>
                         <td>
                             <p>
                                 <strong style="display:block">{{$song->title}}</strong>
