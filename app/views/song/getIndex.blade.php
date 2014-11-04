@@ -35,7 +35,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php print_r($songs)?>
+                    <?php
+                    sd($songs);
+                    ?>
                 </tbody>
             </table>
         </div>
