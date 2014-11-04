@@ -38,7 +38,11 @@
                     @foreach($songs as $song)
                     <tr>
                         <td>
-                            {{$song->title}}
+                            <p>
+                                <strong style="display:block">{{$song->title}}</strong>
+                                {{$song->album}}  ({{$song->release_year}})
+                                <br/>{{$song->genre}}
+                            </p>
                         </td>
                         
                     </tr>
