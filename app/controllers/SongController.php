@@ -4,8 +4,8 @@ class SongController extends BaseController {
 
     function getIndex() {
         $songs = Song::getSongs(10);
-        return Response::json($songs);
-        //return View::make('song.getIndex')->withSongs($songs);
+        //return Response::json($songs);
+        return View::make('song.getIndex')->withSongs($songs);
     }
 
     function getShow($id) {
