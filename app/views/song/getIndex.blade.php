@@ -44,8 +44,12 @@
                                 <br/>{{$song->genre}}
                             </p>
                         </td>
-                        <td><a href="{{URL::to('artist/show/'.$song->artist_id)}}">{{$song->dbartist->name}}</a></td>
-                        
+                        <td><a href="{{URL::to('artist/show/'.$song->artist_id)}}"></a></td>
+                        <td>{{$song->bpm}}</td>
+                        <td class="text-right">
+                            <a href="{{URL::to('song/edit/'.$song->id)}}" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="{{URL::to('song/delete/'.$song->id)}}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
