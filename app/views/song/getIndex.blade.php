@@ -44,6 +44,7 @@
                                 <br/>{{$song->genre}}
                             </p>
                         </td>
+                        <td><a href="{{URL::to('artist/show/'.$song->artist_id)}}">{{$song->dbartist->name}}</a></td>
                         
                     </tr>
                     @endforeach
