@@ -32,7 +32,7 @@ class SongController extends BaseController {
     public function getDelete($id) {
         $song = Song::findOrFail($id);
         $song->delete();
-        Response::json($song);
+        return Redirect::to('/song/')->with('message', 'data has been deleted');
     }
 
     public function getPreimport() {
