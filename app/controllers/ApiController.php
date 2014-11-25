@@ -1,13 +1,11 @@
 <?php
 
-class ApiController extends BaseController
-{
+class ApiController extends BaseController {
 
     /**
      * 2014-09-25
      */
-    function playlist()
-    {
+    function playlist() {
         $date = App::environment() == 'local' ? '2014-09-25' : date('Y-m-d');
         $program = Program::where('is_active', 'true')->first();
 
@@ -29,22 +27,20 @@ class ApiController extends BaseController
 
         $results = DB::select($sql, array($program->id, $date));
         $songs = array();
-        foreach ($results as $i)
-        {
+        foreach ($results as $i) {
 
             $allsongs = Song::where('artist_id', $i->artist_id)
-                ->whereRaw('bpm BETWEEN ' . $program->min_bpm . ' AND ' . $program->max_bpm, array())
-                ->limit(5)
-                ->get();
-            
+                    ->whereRaw('bpm BETWEEN ' . $program->min_bpm . ' AND ' . $program->max_bpm, array())
+                    ->limit(5)
+                    ->get();
+
             $sql = "SELECT m.id, m.fullname "
-                . "FROM members m INNER JOIN music_interests mi "
-                . "ON mi.`fb_user_id` = m.`facebook_id` "
-                . "WHERE mi.`artist_id` = ?";
+                    . "FROM members m INNER JOIN music_interests mi "
+                    . "ON mi.`fb_user_id` = m.`facebook_id` "
+                    . "WHERE mi.`artist_id` = ?";
             $likedmember = DB::select($sql, array($i->artist_id));
-            
-            if ($allsongs->toArray())
-            {
+
+            if ($allsongs->toArray()) {
                 $song['id'] = $i->artist_id;
                 $song['artist'] = $i->name;
                 $song['total'] = $i->total;
@@ -55,8 +51,7 @@ class ApiController extends BaseController
                 $songs[] = $song;
             }
 
-            if (count($songs) > 9)
-            {
+            if (count($songs) > 9) {
                 break;
             }
         }
@@ -64,8 +59,8 @@ class ApiController extends BaseController
         $json['data'] = $songs;
         return Response::json($json);
     }
-    
-    function likedmember($id){
+
+    function likedmember($id) {
         $sql = "SELECT m.id, m.fullname "
                 . "FROM members m INNER JOIN music_interests mi "
                 . "ON mi.`fb_user_id` = m.`facebook_id` "
@@ -73,7 +68,7 @@ class ApiController extends BaseController
         $results = DB::select($sql, array($id));
         $result = "";
         foreach ($results as $key => $value) {
-            $result .= $value->fullname.", ";
+            $result .= $value->fullname . ", ";
         }
         $json['success'] = true;
         $json['data'] = $result;
@@ -87,11 +82,10 @@ class ApiController extends BaseController
      * @param int $id
      * @return json
      */
-    public function programChange($id)
-    {
+    public function programChange($id) {
         DB::table('programs')
-            ->where('is_active', 'true')
-            ->update(array('is_active' => 'false'));
+                ->where('is_active', 'true')
+                ->update(array('is_active' => 'false'));
 
         $program = Program::find($id);
         $program->is_active = 'true';
@@ -102,8 +96,7 @@ class ApiController extends BaseController
         return Response::json($resp);
     }
 
-    public function listeners($id)
-    {
+    public function listeners($id) {
         $sql = "
         SELECT * FROM `listeners` 
         WHERE 
@@ -113,14 +106,13 @@ class ApiController extends BaseController
         ";
         $date = '2014-09-25';
         $listeners = Listener::where('program_id', $id)
-            ->whereRaw('DATE(created_at) = ?', array($date))
-            ->orderBy('created_at', 'DESC')
-            ->get();
+                ->whereRaw('DATE(created_at) = ?', array($date))
+                ->orderBy('created_at', 'DESC')
+                ->get();
         return Response::json(array('data' => $listeners));
     }
 
-    public function nosong($programID)
-    {
+    public function nosong($programID) {
         $date = App::environment() == 'local' ? '2014-09-25' : date('Y-m-d');
         $sql = "
             SELECT 
@@ -142,39 +134,44 @@ class ApiController extends BaseController
         return Response::json($results);
     }
 
-    public function ignoreList()
-    {
+    public function ignoreList() {
         $ignore = Ignore::with('artist')
-            ->orderBy('created_at')
-            ->get();
+                ->orderBy('created_at')
+                ->get();
         return Response::json(array('data' => $ignore->toArray()));
     }
 
-    function ignore($id)
-    {
+    function ignore($id) {
         $ignore = Ignore::find($id);
-        if (!$ignore)
-        {
+        if (!$ignore) {
             $ignore = Ignore::create(['artist_id' => $id]);
         }
 
         return Response::json($ignore);
     }
 
-    function ignoreRemove($id)
-    {
+    function ignoreRemove($id) {
         $ignore = Ignore::find($id);
-        if ($ignore)
-        {
+        if ($ignore) {
             $ignore->delete();
         }
         return Response::json($ignore);
     }
-    
-    function ignoreRemoveAll()
-    {
+
+    function ignoreRemoveAll() {
         $ignore = Ignore::truncate();
         return Response::json($ignore);
+    }
+
+    function newsong($id) {
+        $users = Newsong::where('song_id', '=', $id)->get()->toArray();
+        if (empty($users)) {
+            $newsong = new Newsong();
+            $newsong->song_id = $id;
+            $newsong->save();
+        }
+
+        return Response::json($id);
     }
 
 }

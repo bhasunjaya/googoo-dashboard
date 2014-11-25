@@ -4,6 +4,16 @@
 @stop
 
 @section('javascripts')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.btnnewsong').click(function () {
+            var id = $(this).attr('data-id');
+            $.get('/api/newsong/' + id, function (r) {
+
+            });
+        });
+    });
+</script>
 @stop
 
 @section('content')
@@ -49,6 +59,7 @@
                         <td class="text-right">
                             <a href="{{URL::to('song/edit/'.$song->id)}}" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
                             <a href="{{URL::to('song/delete/'.$song->id)}}" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></a>
+                            <button data-id="{{$song->id}}" class="btn btn-xs btn-primary btnnewsong"><span class="glyphicon glyphicon-plus-sign"></span></button>
                         </td>
                     </tr>
                     @endforeach
