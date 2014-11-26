@@ -1,7 +1,6 @@
 <?php
 
-class Song extends \LaravelBook\Ardent\Ardent
-{
+class Song extends \LaravelBook\Ardent\Ardent {
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'modified_at';
@@ -18,16 +17,61 @@ class Song extends \LaravelBook\Ardent\Ardent
     public $autoHydrateEntityFromInput = true;    // hydrates on new entries' validation
     public $forceEntityHydrationFromInput = true;
 
-    function dbartist()
-    {
+    function dbartist() {
         return $this->belongsTo("Artist", 'artist_id');
     }
 
-    static function getSongs($limit)
-    {
-        $songs = self::orderBy('modified_at', 'DESC')->with('dbartist');
-        if (Input::get('q'))
-        {
+    static function getSongs($limit) {
+        $songs = self::leftJoin('newsongs', function($join) {
+                            $join->on('songs.id', '=', 'newsongs.song_id');
+                        })->select([
+                            'songs.id',
+                            'songs.slug',
+                            'songs.slug_artist',
+                            'songs.artist_id',
+                            'songs.genre_id',
+                            'songs.artist',
+                            'songs.title',
+                            'songs.album',
+                            'songs.genre',
+                            'songs.release_year',
+                            'songs.bpm',
+                            'songs.created_at',
+                            'songs.modified_at',
+                            'songs.is_lastfm',
+                            'newsongs.song_id'
+                        ])
+                        ->orderBy('modified_at', 'DESC')->with('dbartist');
+        if (Input::get('q')) {
+            $q = '%' . Input::get('q') . '%';
+            $songs->where('title', 'like', $q);
+        }
+        return $songs->paginate($limit);
+    }
+
+    static function getNewSongs($limit) {
+        $songs = self::join('newsongs', function($join) {
+                            $join->on('songs.id', '=', 'newsongs.song_id');
+                        })->select([
+                            'songs.id',
+                            'songs.slug',
+                            'songs.slug_artist',
+                            'songs.artist_id',
+                            'songs.genre_id',
+                            'songs.artist',
+                            'songs.title',
+                            'songs.album',
+                            'songs.genre',
+                            'songs.release_year',
+                            'songs.bpm',
+                            'songs.created_at',
+                            'songs.modified_at',
+                            'songs.is_lastfm',
+                            'newsongs.song_id',
+                            'newsongs.id as newsong_id'
+                        ])
+                        ->orderBy('newsongs.updated_at', 'DESC')->with('dbartist');
+        if (Input::get('q')) {
             $q = '%' . Input::get('q') . '%';
             $songs->where('title', 'like', $q);
         }
@@ -41,8 +85,7 @@ class Song extends \LaravelBook\Ardent\Ardent
       TRUNCATE `songs`;
      * @return boolean
      */
-    public function beforeSave()
-    {
+    public function beforeSave() {
         $iArtist = Input::get('artist', $this->artist);
         $iTitle = Input::get('title', $this->title);
         $iGenre = Input::get('genre', $this->genre);
@@ -52,17 +95,15 @@ class Song extends \LaravelBook\Ardent\Ardent
         $slugTitle = strtolower(Str::slug($iArtist . ' ' . $iTitle));
 
         $artist = Artist::ofSlug($slugArtist)->first();
-        if (!$artist)
-        {
+        if (!$artist) {
             $artist = Artist::create(array(
-                    'slug' => $slugArtist,
-                    'name' => $iArtist
+                        'slug' => $slugArtist,
+                        'name' => $iArtist
             ));
         }
 
         $genre = Genre::ofSlug($slugGenre)->first();
-        if (!$genre)
-        {
+        if (!$genre) {
             $genre = Genre::create(['slug' => $slugGenre, 'name' => $iGenre]);
         }
 

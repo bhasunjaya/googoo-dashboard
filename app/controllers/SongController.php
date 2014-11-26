@@ -7,6 +7,12 @@ class SongController extends BaseController {
         //return Response::json($songs);
         return View::make('song.getIndex')->withSongs($songs);
     }
+    
+    function getNewsongs() {
+        $songs = Song::getNewSongs(10);
+        //return Response::json($songs);
+        return View::make('song.getNewSong')->withSongs($songs);
+    }
 
     function getShow($id) {
         $song = Song::findOrFail($id);
@@ -33,6 +39,12 @@ class SongController extends BaseController {
         $song = Song::findOrFail($id);
         $song->delete();
         return Redirect::to('/song/')->with('message', 'data has been deleted');
+    }
+    
+    public function getNewsongdelete($id) {
+        $song = Newsong::findOrFail($id);
+        $song->delete();
+        return Redirect::to('/song/newsongs')->with('message', 'data has been deleted');
     }
 
     public function getPreimport() {
