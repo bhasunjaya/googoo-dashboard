@@ -11,8 +11,11 @@ class ArtistController extends BaseController {
 
     public function getShow($id) {
         $artist = Artist::with('songs', 'genres', 'fbartist')->findOrFail($id);
+        $similar_artist = Artist::getSimilarArtists($id);
         return View::make('artist.getShow')
-                        ->with('artist', $artist);
+                        ->with('artist', $artist)
+                        ->with('similar_artist', $similar_artist);
+        ;
     }
 
     public function getEdit($id) {
@@ -22,23 +25,22 @@ class ArtistController extends BaseController {
                         ->withArtist($artist)
                         ->with('similar_artist', $similar_artist);
     }
-    
-    function getArtistlist(){
+
+    function getArtistlist() {
         $term = trim(strip_tags($_GET['term']));
         $all_artist = Artist::getArtistByName($term);
-        if (!empty($all_artist)){
+        if (!empty($all_artist)) {
             foreach ($all_artist as $value) {
-                $row['value']=htmlentities(stripslashes($value->name));
-                $row['data']=$value->id;
-                $row_set[] = $row;//build an array
+                $row['value'] = htmlentities(stripslashes($value->name));
+                $row['data'] = $value->id;
+                $row_set[] = $row; //build an array
             }
-        }else{
-            $row['value']=htmlentities(stripslashes('Tidak ditemukan, klik + untuk tambahkan ke database?'));
-            $row['data']= 0;
-            $row_set[] = $row;//build an array
+        } else {
+            $row['value'] = htmlentities(stripslashes('Tidak ditemukan, klik + untuk tambahkan ke database?'));
+            $row['data'] = 0;
+            $row_set[] = $row; //build an array
         }
         return Response::json($row_set);
-        
     }
 
     public function getDelete($id) {
@@ -93,14 +95,14 @@ class ArtistController extends BaseController {
             $old_similar = Similar::where('artist_id', '=', $id)
                     ->orWhere('similar_artist_id', '=', $id);
             $old_similar->delete();
-            
-            foreach ($similar as $key => $sim_name){
-                if ($sim_name != ""){
+
+            foreach ($similar as $key => $sim_name) {
+                if ($sim_name != "") {
                     $newsimilar = new Similar;
                     $newsimilar->artist_id = $id;
                     $newsimilar->similar_artist_id = $sim_id[$key];
                     $newsimilar->save();
-                    
+
                     $newsimilar = new Similar;
                     $newsimilar->artist_id = $sim_id[$key];
                     $newsimilar->similar_artist_id = $id;

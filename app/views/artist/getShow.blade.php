@@ -39,6 +39,14 @@
                             @endforeach
                         </td>
                     </tr>
+                    <tr>
+                        <td>Similar Artists</td>
+                        <td>
+                            @foreach($similar_artist as $sim_art)
+                            {{$sim_art->name}}, 
+                            @endforeach
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
