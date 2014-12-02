@@ -17,7 +17,10 @@ class ArtistController extends BaseController {
 
     public function getEdit($id) {
         $artist = Artist::with('genres')->findOrFail($id);
-        return View::make('artist.getEdit')->withArtist($artist);
+        $similar_artist = Artist::getSimilarArtists($id);
+        return View::make('artist.getEdit')
+                        ->withArtist($artist)
+                        ->with('similar_artist', $similar_artist);
     }
     
     function getArtistlist(){

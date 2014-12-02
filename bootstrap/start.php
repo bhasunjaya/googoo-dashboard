@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
     //getenv('SERVER_NAME')
-    'local' => array('localhost', 'erwin', 'brewmaster'),
+    'local' => array('localhost', 'anwar', 'anwarnur'),
     'live' => array('googoo.fm', 'ruangsiar.googoo.fm')
     ));
 

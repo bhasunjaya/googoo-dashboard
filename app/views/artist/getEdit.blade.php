@@ -76,27 +76,27 @@
             </div>
             <div class="form-group input_fields_wrap">
                 <label class="control-label" for="similar">Similar Artist</label></br>
-                <button class="btn btn-primary add_field_button">Add More Similar Artist</button></br></br>
-                <div>
-                    <input type="text" id="text_1" class="form-control autocomplete" name="sim_name[]"/>
-                    <input type="hidden" class="text_1" name="sim_id[]"/>
-                </div>
-                <div>
-                    <input type="text" id="text_2" class="form-control autocomplete" name="sim_name[]" />
-                    <input type="hidden" class="text_2" name="sim_id[]"/>
-                </div>
-                <div>
-                    <input type="text" id="text_3" class="form-control autocomplete" name="sim_name[]" />
-                    <input type="hidden" class="text_3" name="sim_id[]"/>
-                </div>
-                <div>
-                    <input type="text" id="text_4" class="form-control autocomplete" name="sim_name[]" />
-                    <input type="hidden" class="text_4" name="sim_id[]"/>
-                </div>
-                <div>
-                    <input type="text" id="text_5" class="form-control autocomplete" name="sim_name[]"/>
-                    <input type="hidden" class="text_5" name="sim_id[]"/>
-                </div>
+                @if ($similar_artist)
+                @foreach ($similar_artist as $key => $sim_art)
+                    <div>
+                        <input type="text" id="text_{{$key}}" class="form-control autocomplete" name="sim_name[]" value="{{$sim_art->name}}" />
+                        <input type="hidden" class="text_{{$key}}" name="sim_id[]" value="{{$sim_art->id}}"/>
+                    </div>
+                    <br/>
+                @endforeach
+                @endif
+                <?php 
+                    $x = 5 - count($similar_artist);
+                    $n = count($similar_artist);
+                ?>
+                @for ($i = 1; $i <= $x; $i++)
+                    <?php $n++ ?>
+                    <div>
+                        <input type="text" id="text_{{$n}}" class="form-control autocomplete" name="sim_name[]" />
+                        <input type="hidden" class="text_{{$n}}" name="sim_id[]" />
+                    </div>
+                    <br/>
+                @endfor
             </div>
             <button type="submit" class="btn btn-info">Submit</button>
         </form>

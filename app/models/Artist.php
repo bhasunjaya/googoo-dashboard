@@ -48,5 +48,11 @@ class Artist extends \LaravelBook\Ardent\Ardent
         $data = DB::select($sql);
         return $data;
     }
+
+    static function getSimilarArtists($id){
+        $sql = "SELECT a.id, a.name FROM similar_artists sa inner join artists a on a.id = sa.similar_artist_id where sa.artist_id = ?";
+        $data = DB::select($sql, array($id));
+        return $data;
+    }
     
 }
