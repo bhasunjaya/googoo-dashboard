@@ -43,4 +43,10 @@ class Artist extends \LaravelBook\Ardent\Ardent
         return $query->where('slug', '=', trim($slug));
     }
     
+    static function getArtistByName($name){
+        $sql = "SELECT * FROM artists WHERE name LIKE '%".$name."%'";
+        $data = DB::select($sql);
+        return $data;
+    }
+    
 }

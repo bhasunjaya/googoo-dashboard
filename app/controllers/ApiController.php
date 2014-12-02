@@ -173,5 +173,9 @@ class ApiController extends BaseController {
 
         return Response::json($id);
     }
+    
+    function listartist(){
+        echo "test";
+    }
 
 }
