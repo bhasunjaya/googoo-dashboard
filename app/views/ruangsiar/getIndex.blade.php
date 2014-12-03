@@ -67,47 +67,56 @@
                     </p>
                 </div>
             </div>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>
-                            Ignore List
-                        </th>
-                        <th>
-                            <a href="{{URL::to('/api/ignore/list')}}" class="btn btn-primary btn-xs pull-right" id="btn-reload-ignore">
-                                <i class="glyphicon glyphicon-refresh"></i> 
-                                <span id="text-reload-ignore"></span>
-                            </a>&nbsp;
-                            <a href="{{URL::to('/api/ignore/removeall')}}" class="btn btn-danger btn-xs pull-right" id="btn-delete-ignore">
-                                delete all
-                            </a>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody  id="ignore-list" style="height:200px;overflow: auto;">
-                
-                </tbody>
-            </table>
-            <hr/>
-            <table class="table table-hover table-bordered" >
-                <thead>
-                    <tr>
-                        <th>
-                            <a href="{{URL::to('/api/listeners/'.$currentProgram->id)}}" class="btn btn-primary btn-xs pull-right" id="btn-reload-connected-user">
-                                <i class="glyphicon glyphicon-refresh"></i> 
-                                <span id="text-reload-connected-user"></span>
-                            </a>
-                            Listeners</th>
-                    </tr>
-                </thead>
-                <tbody  id="listeners-list">
-                </tbody>
-            </table>
-
         </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Ignore List
+                <div class="pull-right action-buttons">
+                    <div class="btn-group pull-right">
+                        <a href="{{URL::to('/api/ignore/list')}}" class="btn btn-primary btn-xs pull-right" id="btn-reload-ignore">
+                            <i class="glyphicon glyphicon-refresh"></i> 
+                            <span id="text-reload-ignore"></span>
+                        </a>&nbsp;
+                        <a href="{{URL::to('/api/ignore/removeall')}}" class="btn btn-danger btn-xs pull-right" id="btn-delete-ignore">
+                            delete all
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="program-current" style="height:200px;overflow: auto;">
+                    <table class="table table-hover">
+                        <tbody  id="ignore-list">
 
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Listeners
+                <div class="pull-right action-buttons">
+                    <div class="btn-group pull-right">
+                        <a href="{{URL::to('/api/listeners/'.$currentProgram->id)}}" class="btn btn-primary btn-xs pull-right" id="btn-reload-connected-user">
+                            <i class="glyphicon glyphicon-refresh"></i> 
+                            <span id="text-reload-connected-user"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div id="program-current" style="height:200px;overflow: auto;">
+                    <table class="table table-hover">
+                        <tbody  id="listeners-list">
 
-
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Fave Artist But No Song</strong></div>
             <div id="nosong-list" style="height:200px;overflow: auto;">
