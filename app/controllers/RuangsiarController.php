@@ -6,7 +6,7 @@ class RuangsiarController extends BaseController
     public function getIndex()
     {
         $date = App::environment() == 'local' ? '2014-09-25' : date('Y-m-d');
-
+        $date = date('Y-m-d');
         $programs = Program::all();
         $currentProgram = Program::where('is_active', 'true')->first();
         $nosongs = $this->nosong($currentProgram->id, $date);
