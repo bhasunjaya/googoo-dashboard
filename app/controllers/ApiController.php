@@ -23,7 +23,7 @@ class ApiController extends BaseController {
                 AND `artists`.`name` IS NOT NULL
                 AND artists.id NOT IN (SELECT artist_id FROM artist_exception)
             GROUP BY `music_interests`.`artist_id`
-            ORDER BY `total` DESC
+            ORDER BY `total` DESC,last DESC,name ASC
         ";
 
         $results = DB::select($sql, array($program->id, $date));
