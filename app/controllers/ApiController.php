@@ -27,8 +27,6 @@ class ApiController extends BaseController {
         ";
 
         $results = DB::select($sql, array($program->id, $date));
-        $queries = DB::getQueryLog();
-        
         $songs = array();
         foreach ($results as $i) {
 
