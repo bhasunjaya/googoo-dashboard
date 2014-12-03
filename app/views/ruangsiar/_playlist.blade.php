@@ -1,7 +1,7 @@
 <tr>
     <td>
         <a href="#" class="btn-liked-member" data-id="@{{id}}"><span class="label label-default">@{{liked_member}}</span></a>
-        &nbsp;&nbsp;&nbsp;&nbsp;@{{artist}}
+        &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="btn-similar-artist" data-id="@{{id}}">@{{artist}}</a>
     </td>
     <td>
         <ul class="list-unstyled">
