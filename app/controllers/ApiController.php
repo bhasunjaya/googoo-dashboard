@@ -7,6 +7,7 @@ class ApiController extends BaseController {
      */
     function playlist() {
         $date = App::environment() == 'local' ? '2014-09-25' : date('Y-m-d');
+        $date = date('Y-m-d');
         $program = Program::where('is_active', 'true')->first();
 
 
