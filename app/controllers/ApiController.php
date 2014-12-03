@@ -97,6 +97,7 @@ class ApiController extends BaseController {
     }
 
     public function listeners($id) {
+        $date = date('Y-m-d');
         $sql = "
         SELECT * FROM `listeners` 
         WHERE 
@@ -104,7 +105,6 @@ class ApiController extends BaseController {
             and DATE(created_at) = '2014-09-25' 
             ORDER BY `created_at` DESC           
         ";
-        $date = '2014-09-25';
         $listeners = Listener::where('program_id', $id)
                 ->whereRaw('DATE(created_at) = ?', array($date))
                 ->orderBy('created_at', 'DESC')
