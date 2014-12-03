@@ -15,8 +15,8 @@ class ApiController extends BaseController {
             SELECT `music_interests`.`artist_id`, count(fb_user_id) as total, 
             MAX(listeners.created_at) as last, `artists`.`name`
             FROM `listeners`
-                LEFT JOIN `music_interests` ON `music_interests`.`fb_user_id`=`listeners`.`facebook_id`
-                LEFT JOIN `artists` ON `artists`.`id`=`music_interests`.`artist_id`
+                INNER JOIN `music_interests` ON `music_interests`.`fb_user_id`=`listeners`.`facebook_id`
+                INNER JOIN `artists` ON `artists`.`id`=`music_interests`.`artist_id`
             WHERE 
                 `listeners`.`program_id` = ?
                 AND DATE(listeners.created_at) = ?
@@ -27,6 +27,7 @@ class ApiController extends BaseController {
         ";
 
         $results = DB::select($sql, array($program->id, $date));
+        
         $songs = array();
         foreach ($results as $i) {
 
