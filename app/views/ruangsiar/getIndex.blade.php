@@ -84,8 +84,8 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody  id="ignore-list">
-
+                <tbody  id="ignore-list" style="height:200px;overflow: auto;">
+                
                 </tbody>
             </table>
             <hr/>
@@ -121,7 +121,7 @@
 
         <div class="panel panel-default">
             <a class="twitter-timeline" href="https://twitter.com/search?q=%40googooradio" data-widget-id="519074417914040320">Tweets about "@googooradio"</a>
-            <script>!function(d, s, id) {
+            <script>!function (d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
     if (!d.getElementById(id)) {
         js = d.createElement(s);
@@ -137,7 +137,7 @@
 </div>
 <!-- Modal -->
 <div class="modal fade" id="likedMemberModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    
+
 </div>
 
 
