@@ -12,7 +12,7 @@ class ApiController extends BaseController {
 
 
         $sql = "
-            SELECT `music_interests`.`artist_id`, count(fb_user_id) as total, 
+            SELECT `music_interests`.`artist_id`, count(facebook_id) as total, 
             MAX(listeners.created_at) as last, `artists`.`name`
             FROM `listeners`
                 INNER JOIN `music_interests` ON `music_interests`.`fb_user_id`=`listeners`.`facebook_id`
