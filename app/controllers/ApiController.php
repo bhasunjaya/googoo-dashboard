@@ -19,14 +19,14 @@ class ApiController extends BaseController {
                 INNER JOIN `artists` ON `artists`.`id`=`music_interests`.`artist_id`
             WHERE 
                 `listeners`.`program_id` = ".$program->id."
-                AND DATE(listeners.created_at) = ?
+                AND DATE(listeners.created_at) = '".$date."'
                 AND `artists`.`name` IS NOT NULL
                 AND artists.id NOT IN (SELECT artist_id FROM artist_exception)
             GROUP BY `music_interests`.`artist_id`
             ORDER BY `total` DESC,last DESC
         ";
 
-        $results = DB::select($sql, array($date));
+        $results = DB::select($sql);
         
         $songs = array();
         foreach ($results as $i) {
