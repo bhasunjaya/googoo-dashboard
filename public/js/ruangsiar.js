@@ -78,6 +78,19 @@ $(function () {
 
         return false;
     });
+    
+    //similarartist 
+    $("#playlist").on('click', '.btn-similar-artist', function () {
+        var id = $(this).attr('data-id');
+        $.get('/api/similarartist/' + id, function (r) {
+            var source = $("#hb-similarartist").html();
+            var template = Handlebars.compile(source);
+            $("#similarArtistModal").html(template(r)).slideDown('slow');
+            $('#similarArtistModal').modal('show');
+        });
+
+        return false;
+    });
 
 
     //reload the ignore 

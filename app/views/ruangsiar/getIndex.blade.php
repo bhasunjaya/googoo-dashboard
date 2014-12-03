@@ -149,6 +149,11 @@
 
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="similarArtistModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+
 
 <script id="hb-listeners" type="text/x-handlebars-template">
     @include('ruangsiar._listeners')
@@ -166,6 +171,10 @@
 
 <script id="hb-ignore" type="text/x-handlebars-template">
     @include('ruangsiar._ignore')
+</script>
+
+<script id="hb-similarartist" type="text/x-handlebars-template">
+    @include('ruangsiar._similarartist');
 </script>
 
 @stop
