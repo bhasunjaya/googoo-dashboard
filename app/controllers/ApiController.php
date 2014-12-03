@@ -26,7 +26,7 @@ class ApiController extends BaseController {
             ORDER BY `total` DESC,last DESC
         ";
 
-        $results = DB::select($sql, array($program->id, $date));
+        $results = DB::select($sql, array($date));
         
         $songs = array();
         foreach ($results as $i) {
