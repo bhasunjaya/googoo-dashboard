@@ -48,6 +48,26 @@ class ArtistController extends BaseController {
         $artist->delete();
         return Redirect::to('/artist');
     }
+    
+    public function getReject($id) {
+        $artist = Rejectedartists::where('artist_id', '=', $id)->get()->toArray();
+        if (empty($artist)) {
+            $reject = new Rejectedartists();
+            $reject->artist_id = $id;
+            $reject->save();
+        }
+
+        return Response::json($id);
+    }
+    
+    public function getDeletereject($id) {
+        $artist = Rejectedartists::where('artist_id', '=', $id);
+        if (!empty($artist)) {
+            $artist->delete();
+        }
+
+        return Response::json($id);
+    }
 
     public function postEdit($id) {
         $artist = Artist::findOrFail($id);

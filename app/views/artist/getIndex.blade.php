@@ -4,6 +4,31 @@
 @stop
 
 @section('javascripts')
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.btnreject').click(function () {
+            var id = $(this).attr('data-id');
+            var btn = $(this);
+            $.get('/artist/reject/' + id, function (r) {
+                btn.removeClass('btn-danger btnreject');
+                btn.addClass('btn-primary btnok');
+                $('.icon-'+id).removeClass('glyphicon-remove');
+                $('.icon-'+id).addClass('glyphicon-ok');
+            });
+        });
+        
+        $('.btnok').click(function () {
+            var id = $(this).attr('data-id');
+            var btn = $(this);
+            $.get('/artist/deletereject/' + id, function (r) {
+                btn.addClass('btn-danger btnreject');
+                btn.removeClass('btn-primary btnok');
+                $('.icon-'+id).addClass('glyphicon-remove');
+                $('.icon-'+id).removeClass('glyphicon-ok');
+            });
+        });
+    });
+</script>
 @stop
 
 @section('content')
@@ -31,7 +56,6 @@
                         <th>Artist</th>
                         <th>Last Update</th>
                         <th>&nbsp;</th>
-                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,9 +72,8 @@
                         <td><small class="text-muted">{{substr($artist->modified_at,0,16)}}</small></td>
                         <td>
                             <a href="{{URL::to('artist/edit/'.$artist->id)}}" class="btn btn-xs btn-info"><span class="glyphicon glyphicon-pencil"></span></a>
-                        </td>
-                        <td>
                             <a href="{{URL::to('artist/delete/'.$artist->id)}}" class="btn btn-danger btn-xs btn-info"><span class="glyphicon glyphicon-trash"></span></a>
+                            <button data-id="{{$artist->id}}" class="btn btn-xs @if ($artist->artist_id == '') btn-danger btnreject @else btn-primary btnok @endif"><span class="icon-{{$artist->id}} glyphicon @if($artist->artist_id == '') glyphicon-remove @else glyphicon-ok @endif"></span></button>
                         </td>
                     </tr>
                     @endforeach

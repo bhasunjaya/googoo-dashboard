@@ -1,7 +1,6 @@
 <?php
 
-class Artist extends \LaravelBook\Ardent\Ardent
-{
+class Artist extends \LaravelBook\Ardent\Ardent {
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'modified_at';
@@ -11,48 +10,49 @@ class Artist extends \LaravelBook\Ardent\Ardent
         'name' => 'required'
     );
 
-    function songs()
-    {
+    function songs() {
         return $this->hasMany('Song')->orderBy('title');
     }
 
-    function fbartist()
-    {
+    function fbartist() {
         return $this->belongsToMany('Fbartis', 'artist_has_fb', 'artist_id', 'fb_artist_id');
     }
 
-    function genres()
-    {
+    function genres() {
         return $this->belongsToMany('Genre', 'artist_has_genres');
     }
 
-    static function getArtists($limit = 10)
-    {
+    static function getArtists($limit = 10) {
 
-        $artists = self::with('genres')->orderBy('modified_at', 'DESC');
-        if (Input::get('q'))
-        {
+        $artists = self::with('genres')
+                ->leftJoin('rejected_artists', function($join) {
+                    $join->on('artists.id', '=', 'rejected_artists.artist_id');
+                })->select([
+                    'artists.*',
+                    'rejected_artists.artist_id'
+                ])
+                ->orderBy('modified_at', 'DESC');
+        if (Input::get('q')) {
             $q = '%' . Input::get('q') . '%';
             $artists->where('name', 'like', $q);
         }
         return $artists->paginate($limit);
     }
-    
-    function scopeOfSlug($query, $slug)
-    {
+
+    function scopeOfSlug($query, $slug) {
         return $query->where('slug', '=', trim($slug));
     }
-    
-    static function getArtistByName($name){
-        $sql = "SELECT * FROM artists WHERE name LIKE '%".$name."%'";
+
+    static function getArtistByName($name) {
+        $sql = "SELECT * FROM artists WHERE name LIKE '%" . $name . "%'";
         $data = DB::select($sql);
         return $data;
     }
 
-    static function getSimilarArtists($id){
+    static function getSimilarArtists($id) {
         $sql = "SELECT a.id, a.name FROM similar_artists sa inner join artists a on a.id = sa.similar_artist_id where sa.artist_id = ?";
         $data = DB::select($sql, array($id));
         return $data;
     }
-    
+
 }
