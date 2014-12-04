@@ -1,7 +1,6 @@
 <?php
 
-class Genre extends \LaravelBook\Ardent\Ardent
-{
+class Genre extends \LaravelBook\Ardent\Ardent {
 
     protected $fillable = [];
 
@@ -13,17 +12,14 @@ class Genre extends \LaravelBook\Ardent\Ardent
         'name' => 'required'
     );
 
-    function artists()
-    {
+    function artists() {
         return $this->belongsToMany('Artist', 'artist_has_genres')->orderBy('name');
     }
 
-    static function getGenres($limit = 10)
-    {
+    static function getGenres($limit = 10) {
 
         $genres = self::with('artists')->orderBy('name');
-        if (Input::get('q'))
-        {
+        if (Input::get('q')) {
             $q = '%' . Input::get('q') . '%';
             $genres->where('name', 'like', $q);
         }
@@ -31,9 +27,14 @@ class Genre extends \LaravelBook\Ardent\Ardent
         return $results;
     }
 
-    function scopeOfSlug($query, $slug)
-    {
+    function scopeOfSlug($query, $slug) {
         return $query->where('slug', '=', trim($slug));
+    }
+    
+    static function getGenreByName($name) {
+        $sql = "SELECT * FROM genres WHERE name LIKE '%" . $name . "%'";
+        $data = DB::select($sql);
+        return $data;
     }
 
 }

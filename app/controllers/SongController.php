@@ -21,8 +21,9 @@ class SongController extends BaseController {
     }
 
     function getEdit($id) {
-        $song = Song::findOrFail($id);
-
+        $song = Song::leftJoin('genres', function($join) {
+                    $join->on('genres.id', '=', 'songs.genre_id');
+                })->findOrFail($id);
         return View::make('song.getEdit')->withSong($song);
     }
 
