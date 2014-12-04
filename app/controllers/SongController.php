@@ -103,8 +103,6 @@ class SongController extends BaseController {
     function getDeletenoartists() {
         $sql = "select s.id from songs s left join artists a on a.id = s.artist_id where a.id is null limit 0, 100";
         $data = DB::select($sql);
-        sd($data);
-
         foreach ($data as $value) {
             $song = Song::findOrFail($value->id);
             $song->delete();
