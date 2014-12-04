@@ -105,10 +105,10 @@ class SongController extends BaseController {
         $data = DB::select($sql);
         sd($data);
 
-//        foreach ($data as $value) {
-//            $song = Song::findOrFail($value->id);
-//            $song->delete();
-//        }
+        foreach ($data as $value) {
+            $song = Song::findOrFail($value->id);
+            $song->delete();
+        }
     }
 
 }
