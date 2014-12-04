@@ -105,6 +105,20 @@ $(function () {
 
         return false;
     });
+    
+    //similaryear 
+    $("#playlist").on('click', '.btn-similar-year', function () {
+        var year = $(this).attr('data-year');
+        var artist_id = $(this).attr('data-artist_id');
+        $.get('/api/similaryear/' + year+'/artistid/'+artist_id, function (r) {
+            var source = $("#hb-similaryear").html();
+            var template = Handlebars.compile(source);
+            $("#similarYearModal").html(template(r)).slideDown('slow');
+            $('#similarYearModal').modal('show');
+        });
+
+        return false;
+    });
 
 
     //reload the ignore 

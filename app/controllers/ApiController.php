@@ -139,6 +139,37 @@ class ApiController extends BaseController {
         $json['data'] = $songs;
         return Response::json($json);
     }
+    
+    function similar_year($year, $artist_id) {
+        $date = date('Y-m-d');
+        $program = Program::where('is_active', 'true')->first();
+
+        $songs = array();
+        $allsongs = Song::where('release_year', $year)
+                ->where('artist_id', '!=', $artist_id)
+                ->leftJoin('genres', function($join) {
+                    $join->on('songs.genre_id', '=', 'genres.id');
+                })->select([
+                    'songs.*',
+                    'genres.id',
+                    'genres.name'
+                ])->whereRaw('bpm BETWEEN ' . $program->min_bpm . ' AND ' . $program->max_bpm, array())
+                ->limit(10)
+                ->orderByRaw("RAND()")
+                ->get();
+
+        if ($allsongs->toArray()) {
+            $songs = $allsongs->toArray();
+        }
+
+        if (count($songs) > 10) {
+            break;
+        }
+
+        $json['success'] = true;
+        $json['data'] = $songs;
+        return Response::json($json);
+    }
 
     function likedmember($id) {
         $sql = "SELECT m.id, m.fullname "

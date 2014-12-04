@@ -29,6 +29,7 @@
                         <th class="col-xs-1">BPM</th>
                         <th>Songs</th>
                         <th>Genres</th>
+                        <th>Year</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -160,6 +161,10 @@
 
 </div>
 
+<div class="modal fade" id="similarYearModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+
 
 <script id="hb-listeners" type="text/x-handlebars-template">
     @include('ruangsiar._listeners')
@@ -185,6 +190,10 @@
 
 <script id="hb-similargenre" type="text/x-handlebars-template">
     @include('ruangsiar._similargenre');
+</script>
+
+<script id="hb-similaryear" type="text/x-handlebars-template">
+    @include('ruangsiar._similaryear');
 </script>
 
 @stop

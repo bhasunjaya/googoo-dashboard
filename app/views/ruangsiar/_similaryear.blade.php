@@ -2,7 +2,7 @@
     <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel">Similar Genre</h4>
+            <h4 class="modal-title" id="myModalLabel">Similar Year</h4>
         </div>
         <div class="modal-body">
             <table class="table table-hover">
