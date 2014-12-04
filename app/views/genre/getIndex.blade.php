@@ -38,7 +38,7 @@
                     @foreach($genres as $genre)
                     <tr>
                         <td>
-                            <strong><a href="{{URL::to('genre/show/'.$genre->id)}}">{{$genre->name}}</a></strong>
+                            <strong>{{$genre->name}}</strong>
                         </td>
                         <td>{{$genre->artists->count()}}</td>
                         <td>
