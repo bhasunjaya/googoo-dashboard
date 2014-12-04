@@ -28,6 +28,7 @@
                         <th class="col-xs-4">Artist</th>
                         <th class="col-xs-1">BPM</th>
                         <th>Songs</th>
+                        <th>Genres</th>
                         <th>&nbsp;</th>
                     </tr>
                 </thead>
@@ -154,6 +155,11 @@
 
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="similarGenreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
+
 
 <script id="hb-listeners" type="text/x-handlebars-template">
     @include('ruangsiar._listeners')
@@ -175,6 +181,10 @@
 
 <script id="hb-similarartist" type="text/x-handlebars-template">
     @include('ruangsiar._similarartist');
+</script>
+
+<script id="hb-similargenre" type="text/x-handlebars-template">
+    @include('ruangsiar._similargenre');
 </script>
 
 @stop

@@ -27,11 +27,18 @@ class ApiController extends BaseController {
         ";
 
         $results = DB::select($sql, array($program->id, $date));
-        
+
         $songs = array();
         foreach ($results as $i) {
 
             $allsongs = Song::where('artist_id', $i->artist_id)
+                    ->leftJoin('genres', function($join) {
+                        $join->on('songs.genre_id', '=', 'genres.id');
+                    })->select([
+                        'songs.*',
+                        'genres.id',
+                        'genres.name'
+                    ])
                     ->whereRaw('bpm BETWEEN ' . $program->min_bpm . ' AND ' . $program->max_bpm, array())
                     ->limit(5)
                     ->get();
@@ -61,8 +68,8 @@ class ApiController extends BaseController {
         $json['data'] = $songs;
         return Response::json($json);
     }
-    
-    function similar_artist($id){
+
+    function similar_artist($id) {
         $date = date('Y-m-d');
         $program = Program::where('is_active', 'true')->first();
 
@@ -76,7 +83,7 @@ class ApiController extends BaseController {
         ";
 
         $results = DB::select($sql, array($id));
-        
+
         $songs = array();
         foreach ($results as $i) {
 
@@ -97,6 +104,37 @@ class ApiController extends BaseController {
                 break;
             }
         }
+        $json['success'] = true;
+        $json['data'] = $songs;
+        return Response::json($json);
+    }
+
+    function similar_genre($id, $artist_id) {
+        $date = date('Y-m-d');
+        $program = Program::where('is_active', 'true')->first();
+
+        $songs = array();
+        $allsongs = Song::where('genre_id', $id)
+                ->where('artist_id', '!=', $artist_id)
+                ->leftJoin('genres', function($join) {
+                    $join->on('songs.genre_id', '=', 'genres.id');
+                })->select([
+                    'songs.*',
+                    'genres.id',
+                    'genres.name'
+                ])->whereRaw('bpm BETWEEN ' . $program->min_bpm . ' AND ' . $program->max_bpm, array())
+                ->limit(10)
+                ->orderByRaw("RAND()")
+                ->get();
+
+        if ($allsongs->toArray()) {
+            $songs = $allsongs->toArray();
+        }
+
+        if (count($songs) > 10) {
+            break;
+        }
+
         $json['success'] = true;
         $json['data'] = $songs;
         return Response::json($json);
@@ -215,8 +253,8 @@ class ApiController extends BaseController {
 
         return Response::json($id);
     }
-    
-    function listartist(){
+
+    function listartist() {
         echo "test";
     }
 

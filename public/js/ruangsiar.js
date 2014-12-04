@@ -91,6 +91,20 @@ $(function () {
 
         return false;
     });
+    
+    //similargenre 
+    $("#playlist").on('click', '.btn-similar-genre', function () {
+        var id = $(this).attr('data-id');
+        var artist_id = $(this).attr('data-artist_id');
+        $.get('/api/similargenre/' + id+'/artistid/'+artist_id, function (r) {
+            var source = $("#hb-similargenre").html();
+            var template = Handlebars.compile(source);
+            $("#similarGenreModal").html(template(r)).slideDown('slow');
+            $('#similarGenreModal').modal('show');
+        });
+
+        return false;
+    });
 
 
     //reload the ignore 

@@ -36,6 +36,7 @@ Route::group(array('before' => 'auth'), function() {
     Route::get('api/ignore/{id}', 'ApiController@ignore');
     Route::get('api/newsong/{id}', 'ApiController@newsong');
     Route::get('api/similarartist/{id}', 'ApiController@similar_artist');
+    Route::get('api/similargenre/{id}/artistid/{artist_id}', 'ApiController@similar_genre');
 });
 
 Route::get('login', array('uses' => 'LoginController@showLogin'));
