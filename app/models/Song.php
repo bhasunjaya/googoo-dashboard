@@ -24,6 +24,8 @@ class Song extends \LaravelBook\Ardent\Ardent {
     static function getSongs($limit) {
         $songs = self::leftJoin('newsongs', function($join) {
                             $join->on('songs.id', '=', 'newsongs.song_id');
+                        })->leftJoin('genres', function($join) {
+                            $join->on('songs.genre_id', '=', 'genres.id');
                         })->select([
                             'songs.id',
                             'songs.slug',
@@ -34,6 +36,7 @@ class Song extends \LaravelBook\Ardent\Ardent {
                             'songs.title',
                             'songs.album',
                             'songs.genre',
+                            'genres.name',
                             'songs.release_year',
                             'songs.bpm',
                             'songs.created_at',
@@ -52,6 +55,8 @@ class Song extends \LaravelBook\Ardent\Ardent {
     static function getNewSongs($limit) {
         $songs = self::join('newsongs', function($join) {
                             $join->on('songs.id', '=', 'newsongs.song_id');
+                        })->leftJoin('genres', function($join) {
+                            $join->on('songs.genre_id', '=', 'genres.id');
                         })->select([
                             'songs.id',
                             'songs.slug',
@@ -62,6 +67,7 @@ class Song extends \LaravelBook\Ardent\Ardent {
                             'songs.title',
                             'songs.album',
                             'songs.genre',
+                            'genres.name',
                             'songs.release_year',
                             'songs.bpm',
                             'songs.created_at',

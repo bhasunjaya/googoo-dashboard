@@ -52,7 +52,7 @@
                             <p>
                                 <strong style="display:block">{{$song->title}}</strong>
                                 {{$song->album}}  ({{$song->release_year}})
-                                <br/>{{$song->genre}}
+                                <br/>{{$song->name}}
                             </p>
                         </td>
                         <td><a href="{{URL::to('artist/show/'.$song->artist_id)}}"><?= (isset($song->dbartist->name)) ? $song->dbartist->name : "" ?></a></td>
