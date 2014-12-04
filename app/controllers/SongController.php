@@ -7,7 +7,7 @@ class SongController extends BaseController {
         //return Response::json($songs);
         return View::make('song.getIndex')->withSongs($songs);
     }
-    
+
     function getNewsongs() {
         $songs = Song::getNewSongs(10);
         //return Response::json($songs);
@@ -40,7 +40,7 @@ class SongController extends BaseController {
         $song->delete();
         return Redirect::to('/song/')->with('message', 'data has been deleted');
     }
-    
+
     public function getNewsongdelete($id) {
         $song = Newsong::findOrFail($id);
         $song->delete();
@@ -96,8 +96,19 @@ class SongController extends BaseController {
                 $dsongs[] = $dbsong;
             }
         }
-        
+
         return View::make('song.getImport')->withSongs($dsongs);
+    }
+
+    function getDeletenoartists() {
+        $sql = "select s.id from songs s left join artists a on a.id = s.artist_id where a.id is null limit 0, 100";
+        $data = DB::select($sql);
+        sd($data);
+
+//        foreach ($data as $value) {
+//            $song = Song::findOrFail($value->id);
+//            $song->delete();
+//        }
     }
 
 }
