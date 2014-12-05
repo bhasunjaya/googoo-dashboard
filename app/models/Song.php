@@ -26,6 +26,8 @@ class Song extends \LaravelBook\Ardent\Ardent {
                             $join->on('songs.id', '=', 'newsongs.song_id');
                         })->leftJoin('genres', function($join) {
                             $join->on('songs.genre_id', '=', 'genres.id');
+                        })->leftJoin('hits_charts', function($join) {
+                            $join->on('songs.id', '=', 'hits_charts.song_id');
                         })->select([
                             'songs.id',
                             'songs.slug',
@@ -42,7 +44,8 @@ class Song extends \LaravelBook\Ardent\Ardent {
                             'songs.created_at',
                             'songs.modified_at',
                             'songs.is_lastfm',
-                            'newsongs.song_id'
+                            'newsongs.song_id',
+                            'hits_charts.id as chart_id'
                         ])
                         ->orderBy('modified_at', 'DESC')->with('dbartist');
         if (Input::get('q')) {
@@ -77,6 +80,38 @@ class Song extends \LaravelBook\Ardent\Ardent {
                             'newsongs.id as newsong_id'
                         ])
                         ->orderBy('newsongs.updated_at', 'DESC')->with('dbartist');
+        if (Input::get('q')) {
+            $q = '%' . Input::get('q') . '%';
+            $songs->where('title', 'like', $q);
+        }
+        return $songs->paginate($limit);
+    }
+    
+    static function getHitsSongs($limit) {
+        $songs = self::join('hits_charts', function($join) {
+                            $join->on('songs.id', '=', 'hits_charts.song_id');
+                        })->leftJoin('genres', function($join) {
+                            $join->on('songs.genre_id', '=', 'genres.id');
+                        })->select([
+                            'songs.id',
+                            'songs.slug',
+                            'songs.slug_artist',
+                            'songs.artist_id',
+                            'songs.genre_id',
+                            'songs.artist',
+                            'songs.title',
+                            'songs.album',
+                            'songs.genre',
+                            'genres.name',
+                            'songs.release_year',
+                            'songs.bpm',
+                            'songs.created_at',
+                            'songs.modified_at',
+                            'songs.is_lastfm',
+                            'hits_charts.song_id',
+                            'hits_charts.id as chart_id'
+                        ])
+                        ->orderBy('hits_charts.updated_at', 'DESC')->with('dbartist');
         if (Input::get('q')) {
             $q = '%' . Input::get('q') . '%';
             $songs->where('title', 'like', $q);

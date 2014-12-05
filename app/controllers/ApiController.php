@@ -284,6 +284,18 @@ class ApiController extends BaseController {
 
         return Response::json($id);
     }
+    
+    function chart($id) {
+        $charts = Chart::where('song_id', '=', $id)->get()->toArray();
+        if (empty($charts)) {
+            $charts = new Chart();
+            $charts->song_id = $id;
+            $charts->count = 1;
+            $charts->save();
+        }
+
+        return Response::json($id);
+    }
 
     function listartist() {
         echo "test";

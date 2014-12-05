@@ -13,6 +13,12 @@ class SongController extends BaseController {
         //return Response::json($songs);
         return View::make('song.getNewSong')->withSongs($songs);
     }
+    
+    function getHitssongs() {
+        $songs = Song::getHitsSongs(10);
+        //return Response::json($songs);
+        return View::make('song.getHitsSong')->withSongs($songs);
+    }
 
     function getShow($id) {
         $song = Song::findOrFail($id);
@@ -46,6 +52,12 @@ class SongController extends BaseController {
         $song = Newsong::findOrFail($id);
         $song->delete();
         return Redirect::to('/song/newsongs')->with('message', 'data has been deleted');
+    }
+    
+    public function getHitssongdelete($id) {
+        $song = Chart::findOrFail($id);
+        $song->delete();
+        return Redirect::to('/song/hitssongs')->with('message', 'data has been deleted');
     }
 
     public function getPreimport() {
