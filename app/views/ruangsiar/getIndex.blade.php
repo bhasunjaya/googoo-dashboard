@@ -22,7 +22,7 @@
                     <span id="text-reload-crowd">reload</span>
                 </a>
             </div>
-            <div style="max-height: 400px;overflow-y: auto">
+            <div style="max-height: 500px;overflow-y: auto">
                 <table class="table">
                     <thead>
                         <tr>
