@@ -69,6 +69,60 @@ class ApiController extends BaseController {
         return Response::json($json);
     }
 
+    function hitslist() {
+        $songs = array();
+        $allsongs = Song::leftJoin('genres', function($join) {
+                    $join->on('songs.genre_id', '=', 'genres.id');
+                })->Join('hits_charts', function($join) {
+                    $join->on('songs.id', '=', 'hits_charts.song_id');
+                })->select([
+                    'songs.*',
+                    'genres.id',
+                    'genres.name'
+                ])->limit(5)
+                ->orderByRaw("RAND()")
+                ->get();
+
+        if ($allsongs->toArray()) {
+            $songs = $allsongs->toArray();
+        }
+
+        if (count($songs) > 10) {
+            break;
+        }
+
+        $json['success'] = true;
+        $json['data'] = $songs;
+        return Response::json($json);
+    }
+    
+    function getnewsong() {
+        $songs = array();
+        $allsongs = Song::leftJoin('genres', function($join) {
+                    $join->on('songs.genre_id', '=', 'genres.id');
+                })->Join('newsongs', function($join) {
+                    $join->on('songs.id', '=', 'newsongs.song_id');
+                })->select([
+                    'songs.*',
+                    'genres.id',
+                    'genres.name'
+                ])->limit(5)
+                ->orderByRaw("RAND()")
+                ->get();
+
+        if ($allsongs->toArray()) {
+            $songs = $allsongs->toArray();
+        }
+
+        if (count($songs) > 10) {
+            break;
+        }
+
+        $json['success'] = true;
+        $json['data'] = $songs;
+        return Response::json($json);
+    }
+
     function similar_artist($id) {
         $date = date('Y-m-d');
         $program = Program::where('is_active', 'true')->first();
@@ -139,7 +193,7 @@ class ApiController extends BaseController {
         $json['data'] = $songs;
         return Response::json($json);
     }
-    
+
     function similar_year($year, $artist_id) {
         $date = date('Y-m-d');
         $program = Program::where('is_active', 'true')->first();
@@ -284,7 +338,7 @@ class ApiController extends BaseController {
 
         return Response::json($id);
     }
-    
+
     function chart($id) {
         $charts = Chart::where('song_id', '=', $id)->get()->toArray();
         if (empty($charts)) {

@@ -1,6 +1,8 @@
 $(function () {
     connectedUser();
     ignoreList();
+    hitslist();
+    newsong();
 
     function ignoreList() {
         $.get('/api/ignore/list', function (r) {
@@ -22,6 +24,26 @@ $(function () {
             $("#text-reload-crowd").html('reload');
         });
     }
+    
+    function hitslist(){
+        $("#text-reload-hits").html('loading...');
+        $.get('/api/hitslist/', function (r) {
+            var source = $("#hb-hitslist").html();
+            var template = Handlebars.compile(source);
+            $("#hitslist").html(template(r)).slideDown('slow');
+            $("#text-reload-hits").html('reload');
+        });
+    }
+    
+    function newsong(){
+        $("#text-reload-new").html('loading...');
+        $.get('/api/newsong/', function (r) {
+            var source = $("#hb-newsong").html();
+            var template = Handlebars.compile(source);
+            $("#newsong").html(template(r)).slideDown('slow');
+            $("#text-reload-new").html('reload');
+        });
+    }
 
 
     function connectedUser() {
@@ -35,7 +57,7 @@ $(function () {
             $(".timeago").timeago();
         });
     }
-
+    
     //change program
     $(".program-change").click(function () {
         var u = $(this).attr('href');
@@ -54,6 +76,12 @@ $(function () {
 
     //reload the playlist
     $("#btn-reload-crowd").click(playlist);
+    
+    //reload the hitslist
+    $("#btn-reload-hits").click(hitslist);
+    
+    //reload the newsong
+    $("#btn-reload-new").click(newsong);
 
     //ignore 
     $("#playlist").on('click', '.btn-ignore', function () {

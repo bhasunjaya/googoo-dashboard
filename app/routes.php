@@ -26,6 +26,8 @@ Route::group(array('before' => 'auth'), function() {
 
     //API
     Route::get('api/playlist', 'ApiController@playlist');
+    Route::get('api/hitslist', 'ApiController@hitslist');
+    Route::get('api/newsong', 'ApiController@getnewsong');
     Route::get('api/likedmember/{id}', 'ApiController@likedmember');
     Route::get('api/program/change/{id}', 'ApiController@programChange');
     Route::get('api/listeners/{id}', 'ApiController@listeners');

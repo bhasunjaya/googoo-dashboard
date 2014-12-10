@@ -17,24 +17,72 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 Crowd Songs 
-                <a href="#" class="btn btn-primary btn-xs pull-right" id="btn-reload-crowd">
+                <a class="btn btn-primary btn-xs pull-right" id="btn-reload-crowd">
                     <i class="glyphicon glyphicon-refresh"></i> 
                     <span id="text-reload-crowd">reload</span>
                 </a>
             </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="col-xs-4">Artist</th>
-                        <th class="col-xs-1">BPM</th>
-                        <th>Songs</th>
-                        <th>Genres</th>
-                        <th>Year</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody id="playlist"></tbody>
-            </table>
+            <div style="max-height: 400px;overflow-y: auto">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">Artist</th>
+                            <th class="col-xs-1">BPM</th>
+                            <th>Songs</th>
+                            <th>Genres</th>
+                            <th>Year</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody id="playlist"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Hits Songs 
+                <a class="btn btn-primary btn-xs pull-right" id="btn-reload-hits">
+                    <i class="glyphicon glyphicon-refresh"></i> 
+                    <span id="text-reload-hits">reload</span>
+                </a>
+            </div>
+            <div style="max-height: 400px;overflow-y: auto">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">Artist</th>
+                            <th class="col-xs-1">BPM</th>
+                            <th>Songs</th>
+                            <th>Genre</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hitslist"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                New Songs 
+                <a class="btn btn-primary btn-xs pull-right" id="btn-reload-new">
+                    <i class="glyphicon glyphicon-refresh"></i> 
+                    <span id="text-reload-new">reload</span>
+                </a>
+            </div>
+            <div style="max-height: 400px;overflow-y: auto">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-xs-4">Artist</th>
+                            <th class="col-xs-1">BPM</th>
+                            <th>Songs</th>
+                            <th>Genre</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody id="newsong"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -95,7 +143,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 Listeners
@@ -118,7 +166,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="panel panel-default">
             <div class="panel-heading"><strong>Fave Artist But No Song</strong></div>
             <div id="nosong-list" style="height:200px;overflow: auto;">
@@ -173,6 +221,18 @@
 <script id="hb-playlist" type="text/x-handlebars-template">
     @{{#each data}}
     @include('ruangsiar._playlist');
+    @{{/each}}
+</script>
+
+<script id="hb-hitslist" type="text/x-handlebars-template">
+    @{{#each data}}
+    @include('ruangsiar._hitslist');
+    @{{/each}}
+</script>
+
+<script id="hb-newsong" type="text/x-handlebars-template">
+    @{{#each data}}
+    @include('ruangsiar._newsong');
     @{{/each}}
 </script>
 
