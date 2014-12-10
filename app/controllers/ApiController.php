@@ -43,11 +43,11 @@ class ApiController extends BaseController {
                     ->limit(5)
                     ->get();
 
-            $sql = "SELECT m.id, m.fullname "
-                    . "FROM members m INNER JOIN music_interests mi "
-                    . "ON mi.`fb_user_id` = m.`facebook_id` "
-                    . "WHERE mi.`artist_id` = ?";
-            $likedmember = DB::select($sql, array($i->artist_id));
+            $sql = "SELECT m.id, m.name "
+                    . "FROM listeners m INNER JOIN music_interests mi "
+                    . "ON mi.`fb_user_id` = m.`facebook_id`"
+                    . "WHERE mi.`artist_id` = ? and m.`program_id` = ? AND DATE(m.created_at) = ?";
+            $likedmember = DB::select($sql, array($i->artist_id, $program->id, $date));
 
             if ($allsongs->toArray()) {
                 $song['id'] = $i->artist_id;
@@ -95,7 +95,7 @@ class ApiController extends BaseController {
         $json['data'] = $songs;
         return Response::json($json);
     }
-    
+
     function getnewsong() {
         $songs = array();
         $allsongs = Song::leftJoin('genres', function($join) {
@@ -226,14 +226,16 @@ class ApiController extends BaseController {
     }
 
     function likedmember($id) {
-        $sql = "SELECT m.id, m.fullname "
-                . "FROM members m INNER JOIN music_interests mi "
-                . "ON mi.`fb_user_id` = m.`facebook_id` "
-                . "WHERE mi.`artist_id` = ?";
-        $results = DB::select($sql, array($id));
+        $date = date('Y-m-d');
+        $program = Program::where('is_active', 'true')->first();
+        $sql = "SELECT m.id, m.name "
+                . "FROM listeners m INNER JOIN music_interests mi "
+                . "ON mi.`fb_user_id` = m.`facebook_id`"
+                . "WHERE mi.`artist_id` = ? and m.`program_id` = ? AND DATE(m.created_at) = ?";
+        $results = DB::select($sql, array($id, $program->id, $date));
         $result = "";
         foreach ($results as $key => $value) {
-            $result .= $value->fullname . ", ";
+            $result .= $value->name . ", ";
         }
         $json['success'] = true;
         $json['data'] = $result;
