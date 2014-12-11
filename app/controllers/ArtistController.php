@@ -45,10 +45,18 @@ class ArtistController extends BaseController {
 
     public function getDelete($id) {
         $artist = Artist::findOrFail($id);
+        $i = $artist->toArray();
+        
+        //remove fbartist
+        DB::table('fb_artists')->where('fbid', '=', $i['fb_band_id'])->delete();
+        
+        //remove songs
+        DB::table('songs')->where('artist_id', '=', $i['id'])->delete();
+        
         $artist->delete();
         return Redirect::to('/artist');
     }
-    
+
     public function getReject($id) {
         $artist = Rejectedartists::where('artist_id', '=', $id)->get()->toArray();
         if (empty($artist)) {
@@ -59,7 +67,7 @@ class ArtistController extends BaseController {
 
         return Response::json($id);
     }
-    
+
     public function getDeletereject($id) {
         $artist = Rejectedartists::where('artist_id', '=', $id);
         if (!empty($artist)) {
