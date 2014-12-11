@@ -50,6 +50,9 @@ class ArtistController extends BaseController {
         //remove fbartist
         DB::table('fb_artists')->where('fbid', '=', $i['fb_band_id'])->delete();
         
+        //remove artists_has_fb
+        DB::table('artist_has_fb')->where('artist_id', '=', $i['id'])->delete();
+        
         //remove songs
         DB::table('songs')->where('artist_id', '=', $i['id'])->delete();
         
